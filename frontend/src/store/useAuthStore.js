@@ -3,16 +3,15 @@ import { create } from 'zustand'
 import { axiosInstance } from '../lib/axios'
 export const useAuthStore = create((set) => ({
     authUser: null,
-
     isSigningUp: false,
     isLoggingIn: false,
     isUpdatingProfile: false,
 
     isCheckingAuth: true,
 
-    chechAuth: async () => {
+    checkAuth: async () => {
         try {
-            const res = await axiosInstance.get('/auth/auth')
+            const res = await axiosInstance.get('/auth/check')
             set({ authUser: res.data })
         } catch (error) {
             console.log("Error in checkAuth controller", error.message);
@@ -21,4 +20,8 @@ export const useAuthStore = create((set) => ({
             set({ isCheckingAuth: false })
         }
     },
+
+    signup: async (data) => {
+        
+    }
 }));
